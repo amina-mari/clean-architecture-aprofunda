@@ -8,4 +8,8 @@ export class Repository implements BookRepository {
   save(book: Book): void {
     this.books.push(book)  
   }
+  
+  findAll(): Book[] {
+    return this.books;
+  }
 }

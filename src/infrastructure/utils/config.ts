@@ -9,7 +9,8 @@ export function configureDependencies() {
  const bookRepository = new Repository();
  const idGenerator = new IdentifierGenerator();
  const createBookUseCase = new CreateBookUseCase(bookRepository, idGenerator);
- const bookController = new BookController(createBookUseCase);
+ const listAllBooksUseCase = new ListAllBooksUseCase(bookRepository);
+ const bookController = new BookController(createBookUseCase, listAllBooksUseCase);
 
  return {
     bookController

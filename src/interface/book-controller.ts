@@ -27,12 +27,18 @@ interface BookDTO {
 export class BookController {
   //seu codigo aqui
   constructor(
-    private createBookUseCase: CreateBookUseCase
+    private createBookUseCase: CreateBookUseCase,
+    private listAllBooksUseCase: ListAllBooksUseCase
   ){}
 
   create(req: Request, res: Response){
     const bookDTO: BookDTO = req.body;
     const book = this.createBookUseCase.execute(bookDTO);
     res.status(201).json(book)
+  }
+
+  listAll(req: Request, res: Response) {
+    const books = this.listAllBooksUseCase.execute()
+    res.json(books);
   }
 }

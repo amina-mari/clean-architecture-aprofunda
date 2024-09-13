@@ -2,7 +2,7 @@ import { Book } from '../../domain/book';
 import { BookRepository } from '../repositories/book-repository';
 import { IdGenerator } from '../repositories/id-generator-interface';
 
-interface Params {
+export interface Params {
   title: string,
   author: string;
   isbn: string;
