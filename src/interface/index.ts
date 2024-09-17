@@ -8,6 +8,9 @@ app.use(express.json());
 const {bookController} = configureDependencies();
 app.post('/books', (req, res) => bookController.create(req, res))
 app.get('/books', (req, res) => bookController.listAll(req, res))
+app.get('/book/:id', (req, res) => bookController.findOne(req, res))
+app.delete('/book/:id', (req, res) => bookController.delete(req, res))
+app.patch('/book/:id', (req, res) => bookController.update(req, res))
 
 if (require.main === module) {
   const PORT = 3333;

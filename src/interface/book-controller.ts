@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { CreateBookUseCase } from '../application/use-cases/create-book-use-case';
 import { ListAllBooksUseCase } from '../application/use-cases/list-all-books-use-case';
+import { FindOneUseCase } from '../application/use-cases/find-one-use-case';
+import { UpdateBooksUseCase } from '../application/use-cases/update-book-use-case';
+import { DeleteBookUseCase } from '../application/use-cases/delete-book-use-case';
 
 export interface CreateBookDTO {
   title: string;
@@ -28,7 +31,10 @@ export class BookController {
   //seu codigo aqui
   constructor(
     private createBookUseCase: CreateBookUseCase,
-    private listAllBooksUseCase: ListAllBooksUseCase
+    private listAllBooksUseCase: ListAllBooksUseCase,
+    private findOneBookUseCase: FindOneUseCase,
+    private updateBookUseCase: UpdateBooksUseCase,
+    private deleteBookUseCase: DeleteBookUseCase
   ){}
 
   create(req: Request, res: Response){
@@ -40,5 +46,19 @@ export class BookController {
   listAll(req: Request, res: Response) {
     const books = this.listAllBooksUseCase.execute()
     res.json(books);
+  }
+
+  findOne(req: Request, res: Response){
+    const book = this.findOneBookUseCase.execute(req.params.id);
+    if(book) return res.status(200).json(book);
+  }
+
+  delete(req: Request, res: Response) {
+    this.deleteBookUseCase.execute(req.params.id);
+    res.status(200).json({message: "Livro deletado com sucesso"})
+  }
+
+  update(req: Request, res: Response) {
+    const book = this.updateBookUseCase.execute(req.body);
   }
 }

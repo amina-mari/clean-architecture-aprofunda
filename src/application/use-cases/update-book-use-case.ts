@@ -3,7 +3,7 @@ import { Book } from "../../domain/book";
 
 export class UpdateBooksUseCase {
     constructor(
-        private bookRepository: BookRepository, id: number
+        private bookRepository: BookRepository
     ) {}
 
     execute(id: string, params: {}) {
